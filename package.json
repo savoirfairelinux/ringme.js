@@ -1,0 +1,30 @@
+{
+  "name": "ringme.js",
+  "version": "0.1.0",
+  "description": "A library to display a \"Ring Me\" button on a website. Also the best way to bring ring communication on your website ! ",
+  "main": "src/ringme.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/savoirfairelinux/ringme.js.git"
+  },
+  "keywords": [
+    "ring.cx",
+    "communication",
+    "savoirfairelinux",
+    "ring",
+    "gnu",
+    "am"
+  ],
+  "author": "Savoirfaire-Linux",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/savoirfairelinux/ringme.js/issues"
+  },
+  "homepage": "https://github.com/savoirfairelinux/ringme.js#readme"
+}
