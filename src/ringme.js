@@ -47,29 +47,41 @@ var RingMe = new function() {
     }
 
     var container = document.getElementById(this.container);
-    var ringUI;
+    if (!container) {
+      console.log('Received container ID <' + this.container + '> has not been found in your page.');
+    }
+    else {
+      var ringUI = _createRingUI();
+
+      container.appendChild(ringUI);
+    }
+  }
+
+  var _createRingUI = function() {
+    var ui;
+
     if (this.ringUriSchemeSupported === URI_SCHEME_STATE.SUPPORTED) {
       var nbsp = '\u00A0';
 
-      ringUI = _createAnchor(
+      ui = _createAnchor(
         'ring:' + this.identifier,
         'Ring' + nbsp + 'Me'
       );
     }
     else if (this.ringUriSchemeSupported === URI_SCHEME_STATE.UNSUPPORTED) {
-      ringUI = _createAnchor(
+      ui = _createAnchor(
         'https://ring.cx/download',
         'Download and install Ring to "Ring Me"'
       );
     }
     else {
-      ringUI = _createAnchor(
+      ui = _createAnchor(
         'https://ring.cx/download',
-        'We cannot be sure if you have Ring\'s lattest version. You might want to download it.'
+        'We cannot be sure if you have Ring\'s latest version. You might want to download it.'
       );
     }
 
-    container.appendChild(ringUI);
+    return ui;
   }
 
   var _createAnchor = function(href, label) {
