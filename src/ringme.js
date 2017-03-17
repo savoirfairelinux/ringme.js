@@ -77,7 +77,7 @@ var RingMe = new function() {
     else {
       ui = _createAnchor(
         'https://ring.cx/download',
-        'We cannot be sure if you have Ring\'s lattest version. You might want to download it.'
+        'We cannot be sure if you have Ring\'s latest version. You might want to download it.'
       );
     }
 
