@@ -104,7 +104,7 @@ var RingMe = new function() {
   }
 
   // https://gist.github.com/aaronk6/d801d750f14ac31845e8
-  // this function is not under Savoir-faire Linux inc. copyright and license negociation 
+  // this function is not under Savoir-faire Linux inc. copyright and license negociation
   // for this code is ongoing here: https://gist.github.com/aaronk6/d801d750f14ac31845e8#gistcomment-1982506
   var _launchUri = function(uri, successCallback, noHandlerCallback, unknownCallback) {
     var res, parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
@@ -210,3 +210,4 @@ var RingMe = new function() {
   }
 }
 
+module.exports = RingMe;
