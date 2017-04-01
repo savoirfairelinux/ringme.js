@@ -84,30 +84,40 @@ var RingMe = new function() {
   }
 
   var _createAnchor = function(href, label) {
+    var ringUIInstance = this;
+
     var anchor = document.createElement('a');
     anchor.setAttribute('href', encodeURI(href));
     anchor.className = 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
-    var ringUIInstance = this;
-    anchor.addEventListener('click', (function (event) {
-      if (!ringUIInstance.isRingSchemeSupported()) {
-        event.preventDefault();
-        event.stopPropagation();
-
-        var redirect = confirm(
-          "We cannot be sure if you have Ring's latest version.\n" +
-          "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
-          "Do you wish to be redirected to Ring's download page?"
+    anchor.addEventListener('click', (
+      function (event) {
+        _ringMeClickEventHandler.apply(
+          ringUIInstance,
+          [event]
         );
-
-        if (redirect) {
-          window.location = encodeURI(RING_DOWNLOAD_URL);
-        }
       }
-    }));
+    ));
     anchorText = document.createTextNode(label);
     anchor.appendChild(anchorText);
 
     return anchor;
+  }
+
+  var _ringMeClickEventHandler = function (event) {
+    if (!this.isRingSchemeSupported()) {
+      event.preventDefault();
+      event.stopPropagation();
+
+      var redirect = confirm(
+        "We cannot be sure if you have Ring's latest version.\n" +
+        "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
+        "Do you wish to be redirected to Ring's download page?"
+      );
+
+      if (redirect) {
+        window.location = encodeURI(RING_DOWNLOAD_URL);
+      }
+    }
   }
 
   var _doCheckRingUriSchemeSupport = function(context) {
