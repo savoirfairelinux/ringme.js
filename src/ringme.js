@@ -35,6 +35,8 @@ var RingMe = new function() {
   this.buttonImage = null;
   this.ringUriScheme = "ring:";
   this.ringUriSchemeSupported = URI_SCHEME_STATE.UNCHECKED;
+  this.ringUriSchemeSupported = URI_SCHEME_STATE.UNKNOWN;
+  this.locale = 'en';
 
   this.setRingUriSchemeSupport = function(isSupported) {
     this.ringUriSchemeSupported = isSupported;
@@ -71,10 +73,13 @@ var RingMe = new function() {
     if ((UI.buttonLabel !== undefined) && (UI.buttonLabel !== null)) {
       this.buttonLabel = UI.buttonLabel;
     }
+    if ((UI.lang !== undefined) && (UI.lang !== null)) {
+      this.locale = UI.lang;
+    }
 
     var container = document.getElementById(this.container);
     if (!container) {
-      console.log('Received container ID <' + this.container + '> has not been found in your page.');
+      console.log(_t(this.locale, 'Received container ID <%s> has not been found in your page.'), this.container);
     }
     else {
       var ringUI = _createRingUI.apply(this);
@@ -129,9 +134,12 @@ var RingMe = new function() {
       event.stopPropagation();
 
       var redirect = confirm(
-        "We cannot be sure if you have Ring's latest version.\n" +
-        "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
-        "Do you wish to be redirected to Ring's download page?"
+        _t(
+          this.locale,
+          "We cannot be sure if you have Ring's latest version.\n" +
+          "You might want to download it at <%s>\n\n" +
+          "Do you wish to be redirected to Ring's download page?"
+        ).replace('%s', RING_DOWNLOAD_URL)
       );
 
       if (redirect) {
@@ -148,6 +156,32 @@ var RingMe = new function() {
       function() { context.setRingUriSchemeSupport.call(context, URI_SCHEME_STATE.UNKNOWN); }
     );
   }
+
+  var _t = function(locale, contentKey) {
+    return _translations[locale][contentKey];
+  }
+
+  var _translations = {
+    en: {
+      'Ring Me':
+        'Ring' + '\u00A0' + 'Me',
+      'Received container ID <%s> has not been found in your page.':
+        'Received container ID <%s> has not been found in your page.',
+      "We cannot be sure if you have Ring's latest version.\nYou might want to download it at <%s>\n\nDo you wish to be redirected to Ring's download page?":
+        "We cannot be sure if you have Ring's latest version.\nYou might want to download it at <%s>\n\nDo you wish to be redirected to Ring's download page?"
+    },
+
+    fr: {
+      'Ring Me':
+        'Ring' + '\u00A0' + 'Me',
+      'Received container ID <%s> has not been found in your page.':
+        'L\'identifiant du conteneur reçu <%s> n\'a pas été trouvé sur cette page.',
+      "We cannot be sure if you have Ring's latest version.\nYou might want to download it at <%s>\n\nDo you wish to be redirected to Ring's download page?":
+        "Nous ne pouvons être certain que Ring est installé ou que vous utilisez la dernière version.\n" +
+        "Vous voulez probablement télécharger la dernière version à l'adresse suivante : <%s>\n\n" +
+        "Voulez-vous être redirigé automatiquement vers la page de téléchargement de Ring ?"
+    },
+  };
 
   // https://gist.github.com/aaronk6/d801d750f14ac31845e8
   // this function is not under Savoir-faire Linux inc. copyright and license negociation
