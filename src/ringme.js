@@ -83,7 +83,7 @@ var RingMe = new function() {
     }
   }
 
-  var _createRingUI = function(buttonImage) {
+  var _createRingUI = function() {
     var ui;
 
     ui = _createAnchor.apply(this,
