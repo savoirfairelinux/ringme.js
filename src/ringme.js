@@ -97,7 +97,8 @@ var RingMe = new function() {
 
   var _createButtonImage = function(buttonImage) {
     var img = document.createElement('img');
-    img.setAttribute('src', buttonImage);
+    img.setAttribute('src', buttonImage.src);
+    img.setAttribute('alt', buttonImage.alt);
     img.className = 'ring--button--img';
 
     return img;
