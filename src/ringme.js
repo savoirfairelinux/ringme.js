@@ -26,9 +26,13 @@ var RingMe = new function() {
     UNCHECKED : 3,
   };
 
+  var nbsp = '\u00A0';
+
   this.action = null;
+  this.buttonLabel = 'Ring' + nbsp + 'Me';
   this.identifier = null;
   this.container = null;
+  this.buttonImage = null;
   this.ringUriScheme = "ring:";
   this.ringUriSchemeSupported = URI_SCHEME_STATE.UNCHECKED;
 
@@ -58,6 +62,15 @@ var RingMe = new function() {
     if ((UI.container !== undefined) && (UI.container !== null)) {
       this.container = UI.container;
     }
+    if ((UI.buttonClass !== undefined) && (UI.buttonClass !== null)) {
+      this.buttonClass = UI.buttonClass;
+    }
+    if ((UI.buttonImage !== undefined) && (UI.buttonImage !== null)) {
+      this.buttonImage = UI.buttonImage;
+    }
+    if ((UI.buttonLabel !== undefined) && (UI.buttonLabel !== null)) {
+      this.buttonLabel = UI.buttonLabel;
+    }
 
     var container = document.getElementById(this.container);
     if (!container) {
@@ -73,22 +86,30 @@ var RingMe = new function() {
   var _createRingUI = function() {
     var ui;
 
-    var nbsp = '\u00A0';
-
     ui = _createAnchor.apply(this,
       ['ring:' + this.identifier,
-      'Ring' + nbsp + 'Me']
+       this.buttonImage ? _createButtonImage(this.buttonImage) :
+        document.createTextNode(this.buttonLabel)]
     );
 
     return ui;
   }
 
-  var _createAnchor = function(href, label) {
+  var _createButtonImage = function(buttonImage) {
+    var img = document.createElement('img');
+    img.setAttribute('src', buttonImage.src);
+    img.setAttribute('alt', buttonImage.alt);
+    img.className = 'ring--button--img';
+
+    return img;
+  }
+
+  var _createAnchor = function(href, child) {
     var ringUIInstance = this;
 
     var anchor = document.createElement('a');
     anchor.setAttribute('href', encodeURI(href));
-    anchor.className = 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
+    anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
     anchor.addEventListener('click', (
       function (event) {
         _ringMeClickEventHandler.apply(
@@ -97,8 +118,7 @@ var RingMe = new function() {
         );
       }
     ));
-    anchorText = document.createTextNode(label);
-    anchor.appendChild(anchorText);
+    anchor.appendChild(child);
 
     return anchor;
   }
