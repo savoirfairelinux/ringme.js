@@ -112,10 +112,13 @@ var RingMe = new function() {
     anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
     anchor.addEventListener('click', (
       function (event) {
-        _ringMeClickEventHandler.apply(
-          ringUIInstance,
-          [event]
-        );
+        if (!ringUIInstance.isRingSchemeSupported()) {
+          window.setTimeout(function() {
+            _ringMeClickEventHandler.apply(
+              ringUIInstance,
+              [event]);
+            }, 600);
+        }
       }
     ));
     anchor.appendChild(child);
