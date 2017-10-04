@@ -108,16 +108,22 @@ var RingMe = new function() {
     var ringUIInstance = this;
 
     var anchor = document.createElement('a');
-    anchor.setAttribute('href', encodeURI(href));
+    const anchorURI = encodeURI(href);
+    anchor.setAttribute('href', anchorURI);
     anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
     anchor.addEventListener('click', (
       function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
         if (!ringUIInstance.isRingSchemeSupported()) {
           window.setTimeout(function() {
             _ringMeClickEventHandler.apply(
               ringUIInstance,
               [event]);
             }, 600);
+        } else {
+          window.location = anchorURI
         }
       }
     ));
@@ -126,11 +132,8 @@ var RingMe = new function() {
     return anchor;
   }
 
-  var _ringMeClickEventHandler = function (event) {
+  var _ringMeClickEventHandler = function () {
     if (!this.isRingSchemeSupported()) {
-      event.preventDefault();
-      event.stopPropagation();
-
       var redirect = confirm(
         "We cannot be sure if you have Ring's latest version.\n" +
         "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
