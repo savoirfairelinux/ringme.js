@@ -108,7 +108,7 @@ var RingMe = new function() {
     var ringUIInstance = this;
 
     var anchor = document.createElement('a');
-    const anchorURI = encodeURI(href);
+    var anchorURI = encodeURI(href);
     anchor.setAttribute('href', anchorURI);
     anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
     anchor.addEventListener('click', (
