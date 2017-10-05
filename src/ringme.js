@@ -99,7 +99,7 @@ var RingMe = new function() {
     var img = document.createElement('img');
     img.setAttribute('src', buttonImage.src);
     img.setAttribute('alt', buttonImage.alt);
-    img.className = 'ring--button--img';
+    img.className = 'btn--ring--img';
 
     return img;
   }
@@ -110,7 +110,7 @@ var RingMe = new function() {
     var anchor = document.createElement('a');
     var anchorURI = encodeURI(href);
     anchor.setAttribute('href', anchorURI);
-    anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
+    anchor.className = this.buttonClass || 'btn btn--ringme';
     anchor.addEventListener('click', (
       function (event) {
         event.preventDefault();
