@@ -26,5 +26,9 @@
   "bugs": {
     "url": "https://github.com/savoirfairelinux/ringme.js/issues"
   },
-  "homepage": "https://github.com/savoirfairelinux/ringme.js#readme"
+  "homepage": "https://github.com/savoirfairelinux/ringme.js#readme",
+  "dependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-node": "^1.6.0"
+  }
 }
