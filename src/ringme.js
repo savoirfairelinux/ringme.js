@@ -178,7 +178,7 @@ var RingMe = new function() {
    * SOFTWARE.
    */
   var _launchUri = function(uri, successCallback, noHandlerCallback, unknownCallback) {
-    var res, parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
+    var parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
 
     function callback (cb) {
       if (typeof cb === 'function') cb();
@@ -281,4 +281,5 @@ var RingMe = new function() {
   }
 }
 
+//TODO: Convert this to use ES6 export syntax
 module.exports = RingMe;

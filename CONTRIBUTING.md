@@ -30,6 +30,17 @@ Contributions will be accepted through the creation of Pull Requests. Here is th
 
 A template is provided to create your Pull Request. Try to fill the information at the best of your knowledge.
 
+#### Coding Standards
+
+This project uses eslint to enforce coding standards. If you are unfamiliar with the eslint tool, you can find instructions to install and use at
+[Getting Stared with ESLint](https://eslint.org/docs/user-guide/getting-started)
+
+##### Note:
+It is reccommended to install eslint as a global npm package so that the eslint command may be used on the command line
+```
+npm install -g eslint //this may require elevated privlidges based on your shell
+```
+
 #### Pull request checklist
 
 For your pull request to be merged, the answer to the following questions must be 'yes':
@@ -37,6 +48,7 @@ For your pull request to be merged, the answer to the following questions must b
 ##### General
 
 * Can the branch be merged automatically?
+* Can the javascript (.js) files be checked with eslint with no errors?
 
 ### Documentation
 
