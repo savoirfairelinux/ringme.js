@@ -16,17 +16,17 @@
  * You should have received a copy of the GNU General Public License
  * along with ringme.js.  If not, see <http://www.gnu.org/licenses/>.
  */
-var RingMe = new function() {
-  var RING_DOWNLOAD_URL = "https://ring.cx/download";
+const RingMe =  new function() {
+  const RING_DOWNLOAD_URL = "https://ring.cx/download";
 
-  var URI_SCHEME_STATE = {
+  const URI_SCHEME_STATE = {
     UNSUPPORTED : 0,
     SUPPORTED : 1,
     UNKNOWN : 2,
     UNCHECKED : 3,
   };
 
-  var nbsp = '\u00A0';
+  const nbsp = '\u00A0';
 
   this.action = null;
   this.buttonLabel = 'Ring' + nbsp + 'Me';
@@ -72,19 +72,19 @@ var RingMe = new function() {
       this.buttonLabel = UI.buttonLabel;
     }
 
-    var container = document.getElementById(this.container);
+    const container = document.getElementById(this.container);
     if (!container) {
       console.log('Received container ID <' + this.container + '> has not been found in your page.');
     }
     else {
-      var ringUI = _createRingUI.apply(this);
+      const ringUI = _createRingUI.apply(this);
 
       container.appendChild(ringUI);
     }
   }
 
-  var _createRingUI = function() {
-    var ui;
+  const _createRingUI = function() {
+    let ui;
 
     ui = _createAnchor.apply(this,
       ['ring:' + this.identifier,
@@ -95,8 +95,8 @@ var RingMe = new function() {
     return ui;
   }
 
-  var _createButtonImage = function(buttonImage) {
-    var img = document.createElement('img');
+  const _createButtonImage = function(buttonImage) {
+    let img = document.createElement('img');
     img.setAttribute('src', buttonImage.src);
     img.setAttribute('alt', buttonImage.alt);
     img.className = 'btn--ring--img';
@@ -104,11 +104,11 @@ var RingMe = new function() {
     return img;
   }
 
-  var _createAnchor = function(href, child) {
-    var ringUIInstance = this;
+  const _createAnchor = function(href, child) {
+    const ringUIInstance = this;
 
-    var anchor = document.createElement('a');
-    var anchorURI = encodeURI(href);
+    let anchor = document.createElement('a');
+    const anchorURI = encodeURI(href);
     anchor.setAttribute('href', anchorURI);
     anchor.className = this.buttonClass || 'btn btn--ringme';
     anchor.addEventListener('click', (
@@ -132,9 +132,9 @@ var RingMe = new function() {
     return anchor;
   }
 
-  var _ringMeClickEventHandler = function () {
+  const _ringMeClickEventHandler = function() {
     if (!this.isRingSchemeSupported()) {
-      var redirect = confirm(
+      let redirect = confirm(
         "We cannot be sure if you have Ring's latest version.\n" +
         "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
         "Do you wish to be redirected to Ring's download page?"
@@ -146,7 +146,7 @@ var RingMe = new function() {
     }
   }
 
-  var _doCheckRingUriSchemeSupport = function(context) {
+  const _doCheckRingUriSchemeSupport = function(context) {
     _launchUri(
       context.ringUriScheme,
       function() { context.setRingUriSchemeSupport.call(context, URI_SCHEME_STATE.SUPPORTED); },
@@ -177,15 +177,15 @@ var RingMe = new function() {
    * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    * SOFTWARE.
    */
-  var _launchUri = function(uri, successCallback, noHandlerCallback, unknownCallback) {
-    var res, parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
+  const _launchUri(uri, successCallback, noHandlerCallback, unknownCallback) {
+    let res, parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
 
     function callback (cb) {
       if (typeof cb === 'function') cb();
     }
 
     function createHiddenIframe (parent) {
-      var iframe;
+      let iframe;
       if (!parent) parent = document.body;
       iframe = document.createElement('iframe');
       iframe.style.display = 'none';
