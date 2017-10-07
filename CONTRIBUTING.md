@@ -38,6 +38,8 @@ For your pull request to be merged, the answer to the following questions must b
 
 * Can the branch be merged automatically?
 * Can you run ESLint (`npm run lint`) without any warnings/errors?
+* Did you avoid any [dark patterns](https://darkpatterns.org/)?
+* Did you avoid adding any network requests to third parties (e.g. <abbr title="Content delivery network">CDN</abbr>)?
 
 ### Documentation
 
