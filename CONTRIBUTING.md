@@ -37,6 +37,7 @@ For your pull request to be merged, the answer to the following questions must b
 ##### General
 
 * Can the branch be merged automatically?
+* Can you run ESLint (`npm run lint`) without any warnings/errors?
 
 ### Documentation
 
