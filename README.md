@@ -21,8 +21,8 @@ Usage
 
 ### Why you don't need it
 
-This project does nothing except proposing a default look & feel for a
-`Ring Me` button that you can add to any web page _easily_.
+This project does nothing other than to propose a default look and feel
+for a `Ring Me` button that you can _easily_ add to any Web page.
 
 You could simply choose to not use this Javascript project and add a
 link on your page like so:
@@ -39,12 +39,12 @@ to handle the `ring:` scheme.
 
 ### Why you need it
 
-Since Ring clients are not spread as much as email clients (yet), this
-little project helps in identifying if `ring:` scheme can be handled by
-the visitor of a web page.
+Since Ring clients are not as widely used as email clients (yet), this
+little project helps by identifying if the `ring:` scheme can be handled
+by a visitor's computer.
 
-It also propose a unified look & feel for a `Ring me` button that will
-be recognized (soon enough) by visitors.
+It also proposes a unified look and feel for a `Ring me` button that
+will soon be recognizable by visitors.
 
 Installation
 -----
@@ -55,7 +55,7 @@ feature in Ring's clients might not yet be available in released branch.
 Sure thing though, you should want to use this library from a server
 you control and prefer a _self-hosted_ solution on your website instead
 of pointing to a <abbr title="Content delivery network">CDN</abbr> in
-order to avoid a _call home_ feature that wouldn't necessary respect
+order to avoid a _call home_ feature that wouldn't necessarily respect
 your privacy.
 
 This section will be updated with proper information as soon as this becomes robust and stable.
