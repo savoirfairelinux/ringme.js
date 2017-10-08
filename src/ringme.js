@@ -208,9 +208,7 @@ var RingMe = new function () {
     // Proprietary msLaunchUri method (IE 10+ on Windows 8+)
     if (navigator.msLaunchUri) {
       navigator.msLaunchUri(uri, successCallback, noHandlerCallback)
-    }
-    // Blur hack (Chrome)
-    else if (browser.isChrome) {
+    } else if (browser.isChrome) { // Blur hack (Chrome)
       blurHandler = function () {
         window.clearTimeout(timeout)
         window.removeEventListener('blur', blurHandler)
@@ -223,9 +221,7 @@ var RingMe = new function () {
       window.addEventListener('blur', blurHandler)
       timeout = window.setTimeout(timeoutHandler, 500)
       window.location.href = uri
-    }
-    // Catch NS_ERROR_UNKNOWN_PROTOCOL exception (Firefox)
-    else if (browser.isFirefox) {
+    } else if (browser.isFirefox) { // Catch NS_ERROR_UNKNOWN_PROTOCOL exception (Firefox)
       iframe = createHiddenIframe()
       try {
         // if we're still allowed to change the iframe's location, the protocol is registered
@@ -240,9 +236,7 @@ var RingMe = new function () {
       } finally {
         removeHiddenIframe()
       }
-    }
-    // Open popup, change location, check wether we can access the location after the change (IE on Windows < 8)
-    else if (browser.isIE) {
+    } else if (browser.isIE) { // Open popup, change location, check wether we can access the location after the change (IE on Windows < 8)
       popup = window.open('', 'launcher', 'width=0,height=0')
       popup.location.href = uri
       try {
@@ -263,9 +257,7 @@ var RingMe = new function () {
         popup.close()
         callback(noHandlerCallback)
       }
-    }
-    // No hack we can use, just open the URL in an hidden iframe and invoke `unknownCallback`
-    else {
+    } else { // No hack we can use, just open the URL in an hidden iframe and invoke `unknownCallback`
       iframe = createHiddenIframe()
       iframe.contentWindow.location.href = uri
       window.setTimeout(function () {
