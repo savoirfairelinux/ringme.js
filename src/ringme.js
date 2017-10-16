@@ -79,11 +79,13 @@ const RingMe = new function () {
   }
 
   const _createRingUI = function () {
-    const ui = _createAnchor.apply(this,
+    let ui = _createAnchor.apply(this,
       ['ring:' + this.identifier,
         this.buttonImage ? _createButtonImage(this.buttonImage)
           : document.createTextNode(this.buttonLabel)]
     )
+
+    ui = _styleButton(ui)
 
     return ui
   }
@@ -95,6 +97,29 @@ const RingMe = new function () {
     img.className = 'btn--ring--img'
 
     return img
+  }
+
+  const _styleButton = function (button) {
+    const box =
+      'border-radius: 6px;' +
+      'padding: 3px 23px 3px 46px;'
+    const genericBackground =
+      'background-color: #3bc1d3;'
+    const dualBackground =
+      'background: ' +
+        'url(../assets/ring-logo_white.svg) 6px center / 20px 20px no-repeat,' +
+        'linear-gradient(to right, #3bc1d3, #3bc1d3) left top / 32px auto repeat-y,' +
+        'linear-gradient(to right, #75d3e0, #75d3e0) 23px top / 20px auto repeat;'
+    const text =
+      'color: #fff;' +
+      'font-family: Georgia, Cambria, "Times New Roman", Times, serif;' +
+      'font-weight: bold;' +
+      'text-decoration: none;'
+
+    const styledButton = button
+    styledButton.setAttribute('style', box + genericBackground + dualBackground + text)
+
+    return styledButton
   }
 
   const _createAnchor = function (href, child) {
