@@ -107,7 +107,7 @@ const RingMe = new function () {
       'background-color: #3bc1d3;'
     const dualBackground =
       'background: ' +
-        'url(../assets/ring-logo_white.svg) 6px center / 20px 20px no-repeat,' +
+        'url(./assets/ring-logo_white.svg) 6px center / 20px 20px no-repeat,' +
         'linear-gradient(to right, #3bc1d3, #3bc1d3) left top / 32px auto repeat-y,' +
         'linear-gradient(to right, #75d3e0, #75d3e0) 23px top / 20px auto repeat;'
     const text =
