@@ -16,11 +16,47 @@ Communication
 The easiest way to [communicate with us is by opening a new issue](https://github.com/savoirfairelinux/ringme.js/issues/new).
 Make sure you add proper labels to your issue (e.g. question, issue, enhancement, …)
 
+Usage
+-----
+
+### Why you don't need it
+
+This project does nothing other than to propose a default look and feel
+for a `Ring Me` button that you can _easily_ add to any Web page.
+
+You could simply choose to not use this Javascript project and add a
+link on your page like so:
+
+`<a href="ring:my-ring-ID">Call me with Ring, a communication tool that
+respects your freedoms and privacy</a>`
+
+as you would add a link on your page to let your visitors email you:
+
+`<a href="mailto:my-email@example.com">Email me!</a>`
+
+The magic happens through the Ring client that configures your computer
+to handle the `ring:` scheme.
+
+### Why you need it
+
+Since Ring clients are not as widely used as email clients (yet), this
+little project helps by identifying if the `ring:` scheme can be handled
+by a visitor's computer.
+
+It also proposes a unified look and feel for a `Ring me` button that
+will soon be recognizable by visitors.
+
 Installation
 -----
 
 This is still in pre-alpha state. No installation process yet and needed
 feature in Ring's clients might not yet be available in released branch.
+
+Sure thing though, you should want to use this library from a server
+you control and prefer a _self-hosted_ solution on your website instead
+of pointing to a <abbr title="Content delivery network">CDN</abbr> in
+order to avoid a _call home_ feature that wouldn't necessarily respect
+your privacy.
 
 This section will be updated with proper information as soon as this becomes robust and stable.
 

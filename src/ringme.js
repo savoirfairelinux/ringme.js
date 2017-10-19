@@ -16,244 +16,279 @@
  * You should have received a copy of the GNU General Public License
  * along with ringme.js.  If not, see <http://www.gnu.org/licenses/>.
  */
-var RingMe = new function() {
-  var RING_DOWNLOAD_URL = "https://ring.cx/download";
+const RingMe = new function () {
+  const RING_DOWNLOAD_URL = 'https://ring.cx/download'
 
-  var URI_SCHEME_STATE = {
-    UNSUPPORTED : 0,
-    SUPPORTED : 1,
-    UNKNOWN : 2,
-    UNCHECKED : 3,
-  };
-
-  var nbsp = '\u00A0';
-
-  this.action = null;
-  this.buttonLabel = 'Ring' + nbsp + 'Me';
-  this.identifier = null;
-  this.container = null;
-  this.buttonImage = null;
-  this.ringUriScheme = "ring:";
-  this.ringUriSchemeSupported = URI_SCHEME_STATE.UNCHECKED;
-
-  this.setRingUriSchemeSupport = function(isSupported) {
-    this.ringUriSchemeSupported = isSupported;
+  const URI_SCHEME_STATE = {
+    UNSUPPORTED: 0,
+    SUPPORTED: 1,
+    UNKNOWN: 2,
+    UNCHECKED: 3
   }
 
-  this.isRingSchemeSupported = function() {
+  const nbsp = '\u00A0'
+
+  this.action = null
+  this.buttonLabel = 'Ring' + nbsp + 'Me'
+  this.identifier = null
+  this.container = null
+  this.buttonImage = null
+  this.ringUriScheme = 'ring:'
+  this.ringUriSchemeSupported = URI_SCHEME_STATE.UNCHECKED
+
+  this.setRingUriSchemeSupport = function (isSupported) {
+    this.ringUriSchemeSupported = isSupported
+  }
+
+  this.isRingSchemeSupported = function () {
     if (this.ringUriSchemeSupported === URI_SCHEME_STATE.UNCHECKED) {
-      _doCheckRingUriSchemeSupport(this);
+      _doCheckRingUriSchemeSupport(this)
     }
 
-    if (this.ringUriSchemeSupported === URI_SCHEME_STATE.SUPPORTED)
-      return true;
-    else
-      return false;
+    if (this.ringUriSchemeSupported === URI_SCHEME_STATE.SUPPORTED) { return true } else { return false }
   }
 
-  this.ui = function(UI) {
-
+  this.ui = function (UI) {
     if ((UI.action !== undefined) && (UI.action !== null)) {
-      this.action = UI.action;
+      this.action = UI.action
     }
     if ((UI.identifier !== undefined) && (UI.identifier !== null)) {
-      this.identifier = UI.identifier;
+      this.identifier = UI.identifier
     }
     if ((UI.container !== undefined) && (UI.container !== null)) {
-      this.container = UI.container;
+      this.container = UI.container
     }
     if ((UI.buttonClass !== undefined) && (UI.buttonClass !== null)) {
-      this.buttonClass = UI.buttonClass;
+      this.buttonClass = UI.buttonClass
     }
     if ((UI.buttonImage !== undefined) && (UI.buttonImage !== null)) {
-      this.buttonImage = UI.buttonImage;
+      this.buttonImage = UI.buttonImage
     }
     if ((UI.buttonLabel !== undefined) && (UI.buttonLabel !== null)) {
-      this.buttonLabel = UI.buttonLabel;
+      this.buttonLabel = UI.buttonLabel
     }
 
-    var container = document.getElementById(this.container);
+    const container = document.getElementById(this.container)
     if (!container) {
-      console.log('Received container ID <' + this.container + '> has not been found in your page.');
-    }
-    else {
-      var ringUI = _createRingUI.apply(this);
+      console.log('Received container ID <' + this.container + '> has not been found in your page.')
+    } else {
+      const ringUI = _createRingUI.apply(this)
 
-      container.appendChild(ringUI);
+      container.appendChild(ringUI)
     }
   }
 
-  var _createRingUI = function() {
-    var ui;
-
-    ui = _createAnchor.apply(this,
+  const _createRingUI = function () {
+    let ui = _createAnchor.apply(this,
       ['ring:' + this.identifier,
-       this.buttonImage ? _createButtonImage(this.buttonImage) :
-        document.createTextNode(this.buttonLabel)]
-    );
+        this.buttonImage ? _createButtonImage(this.buttonImage)
+          : document.createTextNode(this.buttonLabel)]
+    )
 
-    return ui;
+    ui = _styleButton(ui)
+
+    return ui
   }
 
-  var _createButtonImage = function(buttonImage) {
-    var img = document.createElement('img');
-    img.setAttribute('src', buttonImage.src);
-    img.setAttribute('alt', buttonImage.alt);
-    img.className = 'ring--button--img';
+  const _createButtonImage = function (buttonImage) {
+    const img = document.createElement('img')
+    img.setAttribute('src', buttonImage.src)
+    img.setAttribute('alt', buttonImage.alt)
+    img.className = 'btn--ring--img'
 
-    return img;
+    return img
   }
 
-  var _createAnchor = function(href, child) {
-    var ringUIInstance = this;
+  const _styleButton = function (button) {
+    const box =
+      'border-radius: 6px;' +
+      'padding: 3px 23px 3px 46px;'
+    const genericBackground =
+      'background-color: #3bc1d3;'
+    const dualBackground =
+      'background: ' +
+        'url(../assets/ring-logo_white.svg) 6px center / 20px 20px no-repeat,' +
+        'linear-gradient(to right, #3bc1d3, #3bc1d3) left top / 32px auto repeat-y,' +
+        'linear-gradient(to right, #75d3e0, #75d3e0) 23px top / 20px auto repeat;'
+    const text =
+      'color: #fff;' +
+      'font-family: Georgia, Cambria, "Times New Roman", Times, serif;' +
+      'font-weight: bold;' +
+      'text-decoration: none;'
 
-    var anchor = document.createElement('a');
-    anchor.setAttribute('href', encodeURI(href));
-    anchor.className = this.buttonClass || 'btn btn--beta btn--icon sflicon-gauge ring--button btn--download';
-    anchor.addEventListener('click', (
+    const styledButton = button
+    styledButton.setAttribute('style', box + genericBackground + dualBackground + text)
+
+    return styledButton
+  }
+
+  const _createAnchor = function (href, child) {
+    const ringUIInstance = this
+
+    const anchor = document.createElement('a')
+    const anchorURI = encodeURI(href)
+    anchor.setAttribute('href', anchorURI)
+    anchor.className = this.buttonClass || 'btn btn--ringme'
+    anchor.addEventListener('click',
       function (event) {
-        _ringMeClickEventHandler.apply(
-          ringUIInstance,
-          [event]
-        );
-      }
-    ));
-    anchor.appendChild(child);
+        event.preventDefault()
+        event.stopPropagation()
 
-    return anchor;
+        if (!ringUIInstance.isRingSchemeSupported()) {
+          window.setTimeout(function () {
+            _ringMeClickEventHandler.apply(
+              ringUIInstance,
+              [event])
+          }, 600)
+        } else {
+          window.location = anchorURI
+        }
+      }
+    )
+    anchor.appendChild(child)
+
+    return anchor
   }
 
-  var _ringMeClickEventHandler = function (event) {
+  const _ringMeClickEventHandler = function () {
     if (!this.isRingSchemeSupported()) {
-      event.preventDefault();
-      event.stopPropagation();
-
-      var redirect = confirm(
+      const redirect = confirm(
         "We cannot be sure if you have Ring's latest version.\n" +
-        "You might want to download it at " + RING_DOWNLOAD_URL + "\n\n" +
+        'You might want to download it at ' + RING_DOWNLOAD_URL + '\n\n' +
         "Do you wish to be redirected to Ring's download page?"
-      );
+      )
 
       if (redirect) {
-        window.location = encodeURI(RING_DOWNLOAD_URL);
+        window.location = encodeURI(RING_DOWNLOAD_URL)
       }
     }
   }
 
-  var _doCheckRingUriSchemeSupport = function(context) {
+  const _doCheckRingUriSchemeSupport = function (context) {
     _launchUri(
       context.ringUriScheme,
-      function() { context.setRingUriSchemeSupport.call(context, URI_SCHEME_STATE.SUPPORTED); },
-      function() { context.setRingUriSchemeSupport.call(context, URI_SCHEME_STATE.UNSUPPORTED); },
-      function() { context.setRingUriSchemeSupport.call(context, URI_SCHEME_STATE.UNKNOWN); }
-    );
+      function () { context.setRingUriSchemeSupport.bind(context)(URI_SCHEME_STATE.SUPPORTED) },
+      function () { context.setRingUriSchemeSupport.bind(context)(URI_SCHEME_STATE.UNSUPPORTED) },
+      function () { context.setRingUriSchemeSupport.bind(context)(URI_SCHEME_STATE.UNKNOWN) }
+    )
   }
 
-  // https://gist.github.com/aaronk6/d801d750f14ac31845e8
-  // this function is not under Savoir-faire Linux inc. copyright and license negociation
-  // for this code is ongoing here: https://gist.github.com/aaronk6/d801d750f14ac31845e8#gistcomment-1982506
-  var _launchUri = function(uri, successCallback, noHandlerCallback, unknownCallback) {
-    var res, parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser;
+  /*!
+   * Copyright © 2015 aaronk6
+   * https://gist.github.com/aaronk6/d801d750f14ac31845e8
+   *
+   * Permission is hereby granted, free of charge, to any person obtaining a copy
+   * of this software and associated documentation files (the "Software"), to deal
+   * in the Software without restriction, including without limitation the rights
+   * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+   * copies of the Software, and to permit persons to whom the Software is
+   * furnished to do so, subject to the following conditions:
+   *
+   * The above copyright notice and this permission notice shall be included in all
+   * copies or substantial portions of the Software.
+   *
+   * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+   * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+   * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+   * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+   * SOFTWARE.
+   */
+  var _launchUri = function (uri, successCallback, noHandlerCallback, unknownCallback) {
+    var parent, popup, iframe, timer, timeout, blurHandler, timeoutHandler, browser
 
     function callback (cb) {
-      if (typeof cb === 'function') cb();
+      if (typeof cb === 'function') cb()
     }
 
     function createHiddenIframe (parent) {
-      var iframe;
-      if (!parent) parent = document.body;
-      iframe = document.createElement('iframe');
-      iframe.style.display = 'none';
-      parent.appendChild(iframe);
-      return iframe;
+      var iframe
+      if (!parent) parent = document.body
+      iframe = document.createElement('iframe')
+      iframe.style.display = 'none'
+      parent.appendChild(iframe)
+      return iframe
     }
 
-    function removeHiddenIframe(parent) {
-      if (!iframe) return;
-      if (!parent) parent = document.body;
-      parent.removeChild(iframe);
-      iframe = null;
+    function removeHiddenIframe (parent) {
+      if (!iframe) return
+      if (!parent) parent = document.body
+      parent.removeChild(iframe)
+      iframe = null
     }
 
-    browser = { isChrome: false, isFirefox: false, isIE: false };
+    browser = { isChrome: false, isFirefox: false, isIE: false }
 
     if (window.chrome && !navigator.userAgent.match(/Opera|OPR\//)) {
-      browser.isChrome = true;
+      browser.isChrome = true
     } else if (typeof InstallTrigger !== 'undefined') {
-      browser.isFirefox = true;
+      browser.isFirefox = true
     } else if ('ActiveXObject' in window) {
-      browser.isIE = true;
+      browser.isIE = true
     }
 
     // Proprietary msLaunchUri method (IE 10+ on Windows 8+)
     if (navigator.msLaunchUri) {
-      navigator.msLaunchUri(uri, successCallback, noHandlerCallback);
-    }
-    // Blur hack (Chrome)
-    else if (browser.isChrome) {
+      navigator.msLaunchUri(uri, successCallback, noHandlerCallback)
+    } else if (browser.isChrome) { // Blur hack (Chrome)
       blurHandler = function () {
-      window.clearTimeout(timeout);
-      window.removeEventListener('blur', blurHandler);
-        callback(successCallback);
-      };
+        window.clearTimeout(timeout)
+        window.removeEventListener('blur', blurHandler)
+        callback(successCallback)
+      }
       timeoutHandler = function () {
-      window.removeEventListener('blur', blurHandler);
-        callback(noHandlerCallback);
-      };
-      window.addEventListener('blur', blurHandler);
-      timeout = window.setTimeout(timeoutHandler, 500);
-      window.location.href = uri;
-    }
-    // Catch NS_ERROR_UNKNOWN_PROTOCOL exception (Firefox)
-    else if (browser.isFirefox) {
-      iframe = createHiddenIframe();
+        window.removeEventListener('blur', blurHandler)
+        callback(noHandlerCallback)
+      }
+      window.addEventListener('blur', blurHandler)
+      timeout = window.setTimeout(timeoutHandler, 500)
+      window.location.href = uri
+    } else if (browser.isFirefox) { // Catch NS_ERROR_UNKNOWN_PROTOCOL exception (Firefox)
+      iframe = createHiddenIframe()
       try {
         // if we're still allowed to change the iframe's location, the protocol is registered
-        iframe.contentWindow.location.href = uri;
-        callback(successCallback);
+        iframe.contentWindow.location.href = uri
+        callback(successCallback)
       } catch (e) {
-      if (e.name === 'NS_ERROR_UNKNOWN_PROTOCOL') {
-        callback(noHandlerCallback);
-      } else {
-        callback(unknownCallback);
-      }
+        if (e.name === 'NS_ERROR_UNKNOWN_PROTOCOL') {
+          callback(noHandlerCallback)
+        } else {
+          callback(unknownCallback)
+        }
       } finally {
-        removeHiddenIframe();
+        removeHiddenIframe()
       }
-    }
-    // Open popup, change location, check wether we can access the location after the change (IE on Windows < 8)
-    else if (browser.isIE) {
-      popup = window.open('', 'launcher', 'width=0,height=0');
-      popup.location.href = uri;
+    } else if (browser.isIE) { // Open popup, change location, check wether we can access the location after the change (IE on Windows < 8)
+      popup = window.open('', 'launcher', 'width=0,height=0')
+      popup.location.href = uri
       try {
         // Try to change the popup's location - if it fails, the protocol isn't registered
         // and we'll end up in the `catch` block.
-        popup.location.href = 'about:blank';
-        callback(successCallback);
+        popup.location.href = 'about:blank'
+        callback(successCallback)
         // The user will be shown a modal dialog to allow the external application. While
         // this dialog is open, we cannot close the popup, so we try again and again until
         // we succeed.
         timer = window.setInterval(function () {
-          popup.close();
-          if (popup.closed) window.clearInterval(timer);
-        }, 500);
+          popup.close()
+          if (popup.closed) window.clearInterval(timer)
+        }, 500)
       } catch (e) {
         // Regain access to the popup in order to close it.
-        popup = window.open('about:blank', 'launcher');
-        popup.close();
-        callback(noHandlerCallback);
+        popup = window.open('about:blank', 'launcher')
+        popup.close()
+        callback(noHandlerCallback)
       }
-    }
-    // No hack we can use, just open the URL in an hidden iframe and invoke `unknownCallback`
-    else {
-      iframe = createHiddenIframe();
-      iframe.contentWindow.location.href = uri;
+    } else { // No hack we can use, just open the URL in an hidden iframe and invoke `unknownCallback`
+      iframe = createHiddenIframe()
+      iframe.contentWindow.location.href = uri
       window.setTimeout(function () {
-        removeHiddenIframe(parent);
-        callback(unknownCallback);
-      }, 500);
+        removeHiddenIframe(parent)
+        callback(unknownCallback)
+      }, 500)
     }
   }
-}
+}()
 
-module.exports = RingMe;
+module.exports = RingMe
