@@ -9,15 +9,23 @@ a {
 }
 
 
-pre, pre code {
+pre, code {
+    background-color: #004c60;
+    color: #fff;
+    font-family: consolas, monaco, monospace;
+}
+
+pre {
+    overflow-x: auto;
     padding: .5em;
 }
 
+pre > code {
+    padding: 0;
+}
+
 code {
-    background-color: #004c60;
     border-radius: 4px;
-    color: #fff;
-    font-family: consolas, monaco, monospace;
     padding: .1em .2em;
 }
 
