@@ -27,6 +27,20 @@
     </section>
 
     <section class="pane">
+        <h2>Output of RingMe.js</h2>
+
+        <div id="ringme-testusr">
+            <script type="text/javascript">
+                RingMe.ui({
+                    'action': 'call',
+                    'identifier': 'testusr',
+                    'container': 'ringme-testusr',
+                });
+            </script>
+        </div>
+    </section>
+
+    <section class="pane margin-bottom-large">
         <h2>Usage</h2>
 
         <section class="sub-pane">
@@ -67,21 +81,20 @@ Email me!⏎
             <p>
                 It also proposes a unified look and feel for a Ring me button that will soon be recognizable by visitors.
             </p>
+            <h4>Example</h4>
+            <pre class="javascript"><code class="javascript">&lt;div id="ringme-testusr"&gt;⏎
+    &lt;script type="text/javascript"&gt;⏎
+        RingMe.ui({⏎
+            'action': 'call',⏎
+            'identifier': 'testusr',⏎
+            'container': 'ringme-testusr',⏎
+        });⏎
+    &lt;/script&gt;⏎
+&lt;/div&gt;</code></pre>
+
+            <p>Previous example outputs a <a href="#ringme-testusr">RingMe button as showned at the top of this page</a>.</p>
+
         </section>
-    </section>
-
-    <section class="pane margin-bottom-large">
-        <h2>Example</h2>
-
-        <div id="ringme-testusr">
-            <script type="text/javascript">
-                RingMe.ui({
-                    'action': 'call',
-                    'identifier': 'testusr',
-                    'container': 'ringme-testusr',
-                });
-            </script>
-        </div>
     </section>
 
     <footer class="background-primary">
