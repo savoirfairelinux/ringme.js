@@ -1,20 +1,109 @@
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8" />
+
     <title>Ring Me™</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
+    <link rel="stylesheet" href="assets/styles.css">
+
     <script type="text/javascript" src="./src/ringme.js"></script>
-  </head>
-  <body>
-    <h1>Ring Me™</h1>
-    <div id="ringme-testusr">
-      <script type="text/javascript">
-        RingMe.ui({
-          'action': 'call',
-          'identifier': 'testusr',
-          'container': 'ringme-testusr',
-        });
-      </script>
-    </div>
-  </body>
+</head>
+<body>
+    <section class="hero">
+        <img src="assets/button.svg" class="ring-logo" alt="ring logo">
+        <h1>RingMe.js</h1>
+    </section>
+
+    <section class="background-primary pane">
+        <h2>What is Ring</h2>
+
+        <blockquote>
+            Ring is free software for universal communication which respects freedoms and privacy of its users.
+        </blockquote>
+
+        <a href="https://ring.cx/">See official Ring website to join the Ring</a>
+    </section>
+
+    <section class="pane">
+        <h2>Output of RingMe.js</h2>
+
+        <div id="ringme-testusr">
+            <script type="text/javascript">
+                RingMe.ui({
+                    'action': 'call',
+                    'identifier': 'testusr',
+                    'container': 'ringme-testusr',
+                });
+            </script>
+        </div>
+    </section>
+
+    <section class="pane margin-bottom-large">
+        <h2>Usage</h2>
+
+        <section class="sub-pane">
+            <h3>Why you don't need it</h3>
+
+            <p>
+                This project does nothing other than to propose a default look and feel for a Ring Me button that you can easily add to any Web page.
+            </p>
+
+            <p>
+                You could simply choose to not use this Javascript project and add a link on your page like so:
+            </p>
+
+            <pre><code>&lt;a href="ring:my-ring-ID"&gt;⏎
+Call me with Ring, a communication tool that respects your freedoms and privacy⏎
+&lt;/a&gt;</code></pre>
+
+            <p>
+                as you would add a link on your page to let your visitors email you:
+            </p>
+
+            <pre><code>&lt;a href="mailto:my-email@example.com"&gt;⏎
+Email me!⏎
+&lt;/a&gt;</code></pre>
+
+            <p>
+                The magic happens through the Ring client that configures your computer to handle the <code>ring:</code> scheme.<p>
+            </p>
+        </section>
+
+        <section class="sub-pane">
+            <h3>Why you need it</h3>
+
+            <p>
+                Since Ring clients are not as widely used as email clients (yet), this little project helps by identifying if the ring: scheme can be handled by a visitor's computer.
+            </p>
+
+            <p>
+                It also proposes a unified look and feel for a Ring me button that will soon be recognizable by visitors.
+            </p>
+            <h4>Example</h4>
+            <pre class="javascript"><code class="javascript">&lt;div id="ringme-testusr"&gt;⏎
+    &lt;script type="text/javascript"&gt;⏎
+        RingMe.ui({⏎
+            'action': 'call',⏎
+            'identifier': 'testusr',⏎
+            'container': 'ringme-testusr',⏎
+        });⏎
+    &lt;/script&gt;⏎
+&lt;/div&gt;</code></pre>
+
+            <p>Previous example outputs a <a href="#ringme-testusr">RingMe button as showned at the top of this page</a>.</p>
+
+        </section>
+    </section>
+
+    <footer class="background-primary">
+        <a href="https://github.com/savoirfairelinux/ringme.js" class="github-project-link">
+            <img src="assets/github-mark.png" alt="github mark">
+            <p>
+                Check out the project on GitHub!
+            </p>
+        </a>
+    </footer>
+</body>
 </html>
