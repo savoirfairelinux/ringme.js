@@ -8,6 +8,7 @@
   },
   "scripts": {
     "lint": "eslint \"src/**/*.js\"",
+    "prepush": "npm run lint",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -35,6 +36,7 @@
     "eslint-plugin-import": "~2.7.0",
     "eslint-plugin-node": "~5.2.0",
     "eslint-plugin-promise": "~3.5.0",
-    "eslint-plugin-standard": "~3.0.1"
+    "eslint-plugin-standard": "~3.0.1",
+    "husky": "^0.14.3"
   }
 }
