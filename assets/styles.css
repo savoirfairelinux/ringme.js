@@ -125,6 +125,10 @@ form#create-my-ring-id > * {
   flex: 1 100%;
 }
 
+form#create-my-ring-id input, form#create-my-ring-id textarea {
+  border: 1px solid #4D8290;
+}
+
 form#create-my-ring-id > fieldset {
   align-items: center;
   border-style: none;
@@ -162,7 +166,12 @@ form#create-my-ring-id .field label .precision {
   display: block;
 }
 
-#code {
+fieldset.result .preview, fieldset.result #code {
+  display: block;
   height: 5em;
   width: 400px;
+}
+
+fieldset.result .preview {
+  border: 1px solid #4D8290;
 }
