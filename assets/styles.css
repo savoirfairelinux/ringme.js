@@ -113,3 +113,56 @@ blockquote::before, blockquote::after {
     width: 100px;
 }
 
+form#create-my-ring-id {
+  border-bottom: 4px solid #4D8290;
+  border-top: 4px solid #4D8290;
+  display: flex;
+  flex-flow: row wrap;
+  padding: 1em 1.5em;
+}
+
+form#create-my-ring-id > * {
+  flex: 1 100%;
+}
+
+form#create-my-ring-id > fieldset {
+  align-items: center;
+  border-style: none;
+  display: flex;
+  flex-flow: row wrap;
+  flex-flow: row wrap;
+  justify-content: center;
+  text-align: left;
+}
+
+form#create-my-ring-id > fieldset > * {
+  align-items: center;
+  justify-content: center;
+}
+
+@media all and (min-width: 800px) {
+  form#create-my-ring-id .fields {
+    border-right: 1px solid #4D8290;
+    flex: 1 auto;
+    order: 1;
+  }
+
+  form#create-my-ring-id .result {
+    flex: 3 0px;
+    order: 2;
+  }
+}
+
+form#create-my-ring-id .field label {
+  display: block;
+  font-weight: bold;
+}
+
+form#create-my-ring-id .field label .precision {
+  display: block;
+}
+
+#code {
+  height: 5em;
+  width: 400px;
+}
